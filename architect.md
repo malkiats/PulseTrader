@@ -192,3 +192,179 @@ OUTPUT_JSON_PATH = "output/signals.json"
 | v3 | ML prediction layer (LSTM / XGBoost) |
 | v4 | Streamlit real-time dashboard |
 | v5 | Broker API integration (paper trading) |
+
+---
+
+# 🧠 Advanced v2 — Context-Aware Intelligence
+
+This section extends the base architecture into a **context-aware, multi-factor trading intelligence platform**.
+
+---
+
+## 🆕 New Capabilities
+
+### 1. Company-Specific News Filtering
+
+Filter news by relevance signals per ticker:
+- Company name (e.g., Apple)
+- CEO name (e.g., Tim Cook)
+- Products (e.g., iPhone)
+- Industry keywords
+
+Example queries: `"Apple earnings"`, `"Apple revenue growth"`, `"Apple iPhone demand"`
+
+---
+
+### 2. News Classification
+
+| Category | Example | Impact Weight |
+|----------|---------|---------------|
+| Earnings | "Revenue beats expectations" | 1.0 |
+| Regulation | "Government bans product" | 0.9 |
+| Event | "Company acquires startup" | 0.8 |
+| Product | "New product launch" | 0.6 |
+| Macro | "Interest rate hike" | 0.6 |
+| Opinion | "Analyst predicts growth" | 0.3 |
+
+Module: `data/news_classifier.py`
+
+---
+
+### 3. Weighted Sentiment Scoring
+
+```python
+impact_score = sentiment_score * news_weight * relevance
+```
+
+| Component | Range | Notes |
+|-----------|-------|-------|
+| `sentiment_score` | -1.0 to +1.0 | FinBERT output |
+| `news_weight` | 0.3 to 1.0 | Based on news category |
+| `relevance` | 0.5 or 1.0 | Direct vs. indirect mention |
+
+---
+
+### 4. Event Detection Engine
+
+Module: `data/event_detector.py`
+
+```python
+def detect_event(text: str) -> str:
+    keywords = {
+        "earnings":    ["earnings", "revenue", "profit"],
+        "acquisition": ["acquire", "merger"],
+        "leadership":  ["CEO", "resign", "appointed"],
+        "legal":       ["lawsuit", "sued"],
+    }
+    for event, words in keywords.items():
+        if any(word in text.lower() for word in words):
+            return event
+    return "general"
+```
+
+Detects: earnings beat/miss, M&A, CEO changes, lawsuits, product bans, partnerships.
+
+---
+
+### 5. Company Fundamentals Layer
+
+Module: `data/fundamentals.py`
+
+Metrics fetched per ticker:
+- Revenue growth
+- Earnings trend
+- Debt ratio
+- Profit margins
+- Analyst ratings
+
+---
+
+### 6. Multi-Factor Signal Engine
+
+```python
+final_score = (
+    technical_score    * 0.4 +
+    sentiment_score    * 0.3 +
+    event_score        * 0.2 +
+    fundamental_score  * 0.1
+)
+
+if final_score > 0.5:
+    signal = "BUY"
+elif final_score < -0.5:
+    signal = "SELL"
+else:
+    signal = "HOLD"
+```
+
+---
+
+## 🏗️ Updated Architecture (v2)
+
+```
+Stock Data           ──────┐
+Technical Indicators ──────┤
+News Sentiment       ──────┼──▶  Multi-Factor Signal Engine  ──▶  BUY/SELL/HOLD
+Event Detection      ──────┤
+Company Fundamentals ──────┘
+```
+
+---
+
+## 📂 New / Updated Modules (v2)
+
+```
+├── data/
+│   ├── market_data.py         # (existing)
+│   ├── news_fetcher.py        # (existing)
+│   ├── news_classifier.py     # NEW — classifies news by type & weight
+│   ├── event_detector.py      # NEW — detects market-moving events
+│   ├── fundamentals.py        # NEW — company financial health
+│
+├── indicators/
+│   ├── technical.py           # (existing)
+│
+├── sentiment/
+│   ├── analyzer.py            # (existing, now feeds weighted scorer)
+│
+├── strategy/
+│   ├── signal_engine.py       # UPDATED — multi-factor scoring
+```
+
+---
+
+## ⚙️ v2 Data Flow
+
+```
+1. Fetch stock data (1-min interval)
+2. Fetch latest 5–10 news articles per stock
+3. Run sentiment analysis (FinBERT)
+4. Classify news type → assign weight
+5. Detect events → assign event_score
+6. Calculate weighted sentiment score
+7. Fetch fundamentals → fundamental_score
+8. Combine all signals → final_score
+9. Generate BUY / SELL / HOLD
+10. Output to console + JSON
+```
+
+---
+
+## 🧪 Future Enhancements (v3+)
+
+- FinBERT fine-tuning on financial event corpus
+- Named Entity Recognition (NER) for better company mention detection
+- Sector-level macro analysis
+- Portfolio optimization
+- Risk management engine (stop-loss, position sizing)
+- Real-time Streamlit dashboard
+- ML layer (LSTM / XGBoost) for price movement prediction
+
+---
+
+## ⚠️ Important Considerations
+
+- Not all news impacts stock price equally
+- Timing and latency matter — stale news = wrong signal
+- More data sources ≠ better signal; deduplication and weighting are critical
+- Requires continuous tuning of weights per market regime
