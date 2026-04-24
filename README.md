@@ -1,4 +1,4 @@
-# 📈 AI Stock Trading Signal System
+# 📈 PulseTrader - AI Stock Trading Signal System
 
 An advanced Python-based system that analyzes:
 - Real-time stock market data (1-minute interval)
