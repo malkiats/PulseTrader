@@ -1,4 +1,4 @@
-# 📈 PulseTrader - AI Stock Trading Signal System
+# 📈 AI Stock Trading Signal System
 
 An advanced Python-based system that analyzes:
 - Real-time stock market data (1-minute interval)
@@ -169,3 +169,69 @@ python main.py
 This system is for **educational purposes only**.
 It does **NOT** guarantee profits.
 Always validate strategies with backtesting before live trading.
+
+---
+
+## 🧠 Advanced v2 — Context-Aware Intelligence
+
+> *Instead of relying only on price and basic sentiment, v2 integrates company-specific news understanding, event detection, business performance signals, and weighted decision scoring.*
+
+### What's New in v2
+
+| Capability | Description |
+|------------|-------------|
+| **Company-Specific Filtering** | News filtered by company name, CEO, products, industry keywords |
+| **News Classification** | Categorizes news by impact: Earnings, Regulation, Event, Product, Macro, Opinion |
+| **Weighted Sentiment Scoring** | `impact_score = sentiment_score × news_weight × relevance` |
+| **Event Detection Engine** | Detects earnings beats, M&A, CEO changes, lawsuits, product bans |
+| **Fundamentals Layer** | Revenue growth, earnings trend, debt ratio, analyst ratings |
+| **Multi-Factor Signal Engine** | Combines all signals into a single weighted final score |
+
+### Multi-Factor Score Formula
+
+```python
+final_score = (
+    technical_score    * 0.4 +
+    sentiment_score    * 0.3 +
+    event_score        * 0.2 +
+    fundamental_score  * 0.1
+)
+```
+
+### Decision Logic
+
+```python
+if final_score > 0.5:
+    signal = "BUY"
+elif final_score < -0.5:
+    signal = "SELL"
+else:
+    signal = "HOLD"
+```
+
+### New Modules (v2)
+
+```
+├── data/
+│   ├── news_classifier.py     # Classifies news by type & impact weight
+│   ├── event_detector.py      # Detects market-moving events
+│   ├── fundamentals.py        # Fetches company financial health data
+```
+
+### Development Phases
+
+| Phase | Scope |
+|-------|-------|
+| 1 | Technical indicators only |
+| 2 | Add sentiment analysis |
+| **3 (v2)** | **News classification + event detection** |
+| 4 | Fundamentals integration |
+| 5 | Machine learning optimization |
+
+---
+
+## ⚠️ Disclaimer (v2)
+
+This system is for **educational and research purposes only**.
+It does **not** guarantee profits or financial success.
+Always validate with backtesting and paper trading before real-world usage.
