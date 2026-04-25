@@ -12,13 +12,10 @@ An advanced Python-based system that analyzes:
 
 ## 🚀 Features
 
-- Track 20–40 stocks simultaneously
-- Fetch market data every minute
-- Aggregate latest 5–10 news headlines per stock
-- Perform sentiment analysis using NLP models
-- Combine sentiment + technical indicators
-- Generate actionable signals
-- Modular & scalable architecture
+- 🌍 **Global Mode**: US stocks (AAPL, MSFT, GOOGL, etc.)
+- 🇮🇳 **Indian Mode**: Indian stocks (TCS, RELIANCE, INFY, etc.)
+- 🤖 **AI Best Buy Recommendations**: Daily top 3 stocks to buy with confidence scores
+- 📊 **Market Mode Toggle**: Switch between global and Indian markets instantly
 
 ---
 
