@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "pulsetrader-signal-engine"
+version = "0.1.0"
+description = "PulseTrader Signal Engine - Vercel Cron Edition"
+
+[tool.poetry.scripts]
+app = "api.cron:app"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
